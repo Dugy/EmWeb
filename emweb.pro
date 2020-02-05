@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT	   += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,15 +22,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000	# disables all the APIs deprecated before Qt 6.0.0
 
 
 SOURCES += \
-        main.cpp \
-        navigator.cpp
+		bullshit.cpp \
+		components_list.cpp \
+		content_base.cpp \
+		default_screen.cpp \
+		main.cpp \
+		navigator.cpp
 
 HEADERS += \
-        navigator.h
+		bullshit.hpp \
+		components_list.h \
+		content_base.hpp \
+		default_screen.h \
+		environment.h \
+		i_navigator.h \
+		navigator.h
 
 FORMS += \
-        navigator.ui
+		bullshit.ui \
+		components_list.ui \
+		default_screen.ui \
+		navigator.ui

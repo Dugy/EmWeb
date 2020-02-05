@@ -2,12 +2,16 @@
 #define NAVIGATOR_H
 
 #include <QMainWindow>
+#include "i_navigator.h"
+#include "content_base.hpp"
 
 namespace Ui {
 	class Navigator;
 }
 
-class Navigator : public QMainWindow
+class ComponentsList;
+
+class Navigator : public QMainWindow, public iNavigator, public Serialisable
 {
 	Q_OBJECT
 
@@ -15,8 +19,22 @@ public:
 	explicit Navigator(QWidget *parent = 0);
 	~Navigator();
 
+	void updateSettings() override;
+	void setWidget(const std::string& name) override;
+
 private:
 	Ui::Navigator *ui;
+	ComponentsList* _componentsList = nullptr;;
+
+	bool _fullscreen = false;
+	Language _language = Language::ENGLISH;
+	std::unique_ptr<ContentBase> _contents;
+
+	void serialisation() override {
+		synch("full", _fullscreen);
+		synch("lang", _language);
+		synch("cont", _contents);
+	}
 };
 
 #endif // NAVIGATOR_H
