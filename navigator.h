@@ -22,6 +22,9 @@ public:
 	void updateSettings() override;
 	void setWidget(const std::string& name) override;
 
+	void language(Language lang) override;
+	Language language() const override;
+
 private:
 	Ui::Navigator *ui;
 	ComponentsList* _componentsList = nullptr;;
@@ -35,6 +38,8 @@ private:
 		synch("lang", _language);
 		synch("cont", _contents);
 	}
+
+	void setupContents();
 };
 
 #endif // NAVIGATOR_H

@@ -29,6 +29,7 @@ SOURCES += \
 		bullshit.cpp \
 		components_list.cpp \
 		content_base.cpp \
+		contextfree_generator/cfg_generator.cpp \
 		default_screen.cpp \
 		main.cpp \
 		navigator.cpp
@@ -37,6 +38,7 @@ HEADERS += \
 		bullshit.hpp \
 		components_list.h \
 		content_base.hpp \
+		contextfree_generator/cfg_generator.hpp \
 		default_screen.h \
 		environment.h \
 		i_navigator.h \

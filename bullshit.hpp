@@ -18,11 +18,16 @@ public:
 	void serialisation() override {
 		ContentBase::serialisation();
 		subclass("bull");
+		synch("value", _contentIndentifier);
 	}
 
 private:
     Ui::Bullshit *ui;
+	std::string _contentIndentifier;
     SERIALISABLE_REGISTER_POLYMORPHIC(ContentBase, Bullshit, "bull");
+	std::vector<QWidget*> _elements;
+
+	void load() override;
 };
 
 #endif // BULLSHIT_HPP

@@ -4,17 +4,14 @@
 #include "i_navigator.h"
 #include <QWidget>
 
-enum class Language {
-	ENGLISH,
-	SLOVAK
-};
-
 struct ContentBase : public QWidget, public SerialisablePolymorphic {
 	Q_OBJECT
 public:
 	virtual ~ContentBase();
 
 	void setNavigator(iNavigator* navigator);
+
+	virtual void load() = 0;
 
 protected:
 	iNavigator* _navigator = nullptr;

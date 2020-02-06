@@ -1,0 +1,34 @@
+{
+	"bullshits" : {
+		"bsen" : {
+			"titles" : "bullshits/bsen_titles.cfg",
+			"contents" : "bullshits/bsen.cfg",
+			"description" : "Esoteric Bullshit",
+			"language" : "en"
+		},
+		"bssk" : {
+			"titles" : "bullshits/bssk_titles.cfg",
+			"contents" : "bullshits/bssk.cfg",
+			"description" : "Ezoterické nezmysly",
+			"language" : "sk"
+		},
+		"bshorssk" : {
+			"titles" : "bullshits/bshorossk_titles.cfg",
+			"contents" : "bullshits/bshorossk.cfg",
+			"description" : "Horoskopy",
+			"language" : "sk"
+		},
+		"bskurysk" : {
+			"titles" : "bullshits/bskurysk_titles.cfg",
+			"contents" : "bullshits/bskurysk.cfg",
+			"description" : "Postupy alternatívnej medicíny",
+			"language" : "sk"
+		},
+		"bskomunistsk" : {
+			"titles" : "bullshits/bskomunist_titles.cfg",
+			"contents" : "bullshits/bskomunist.cfg",
+			"description" : "Komunistické kecy",
+			"language" : "sk"
+		}
+	}
+}

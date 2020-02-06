@@ -7,7 +7,7 @@
 #ifdef __EMSCRIPTEN__
 
 #include "emscripten.h"
-std::string getFile(const std::string& name) {
+inline std::string getFile(const std::string& name) {
 	std::string fileName = "https://github.com/Dugy/emweb/resources/" + name;
 	int size = -1;
 	char* data = nullptr;
@@ -20,18 +20,18 @@ std::string getFile(const std::string& name) {
 	return made;
 }
 
-std::shared_ptr<Serialisable::JSON> sessionSettings() {
+inline std::shared_ptr<Serialisable::JSON> sessionSettings() {
 	return std::shared_ptr<Serialisable::JSON>();
 }
 
-void sessionSettings(std::shared_ptr<Serialisable::JSON>) {
+inline void sessionSettings(std::shared_ptr<Serialisable::JSON>) {
 }
 
 #else
 
 #include <fstream>
-std::string getFile(const std::string& name) {
-	std::string fileName = "resources/" + name;
+inline std::string getFile(const std::string& name) {
+	std::string fileName = "../resources/" + name;
 	std::ifstream file(fileName);
 	if (!file.good()) throw(std::runtime_error(fileName + ": file unavailable"));
 	std::string made;
@@ -47,12 +47,12 @@ std::string getFile(const std::string& name) {
 
 inline constexpr char* SETTINGS_FILE = "settings.json";
 
-std::shared_ptr<Serialisable::JSON> sessionSettings() {
+inline std::shared_ptr<Serialisable::JSON> sessionSettings() {
 	std::ifstream file(SETTINGS_FILE);
 	return Serialisable::parseJSON(file);
 }
 
-void sessionSettings(std::shared_ptr<Serialisable::JSON> from) {
+inline void sessionSettings(std::shared_ptr<Serialisable::JSON> from) {
 	std::ofstream file(SETTINGS_FILE);
 	from->write(file);
 }

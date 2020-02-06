@@ -19,11 +19,11 @@ Navigator::Navigator(QWidget *parent) :
 		auto settings = sessionSettings();
 		fromJSON(settings);
 		if (_contents) {
-			_contents->setNavigator(this);
 			ui->layout->insertWidget(MAIN, _contents.get(), 1);
+			setupContents();
 		}
 	} catch (std::exception& e) {
-		std::cerr << "Bad data, going default" << std::endl;
+		std::cerr << "Bad data (" << e.what() << "), going default" << std::endl;
 	}
 
 	if (!_contents) {
@@ -43,12 +43,25 @@ Navigator::~Navigator()
 }
 
 void Navigator::setWidget(const std::string& name) {
-	auto removed = ui->layout->itemAt(MAIN);
+	auto removed = ui->layout->takeAt(MAIN);
 	_contents = GenericFactory<ContentBase>::createChild(name);
-	ui->layout->replaceWidget(removed->widget(), _contents.get());
-	delete removed->widget();
+	ui->layout->insertWidget(MAIN, _contents.get(), 1);
+	setupContents();
 }
 
 void Navigator::updateSettings() {
 	sessionSettings(toJSON());
+}
+
+void Navigator::language(Language lang) {
+	_language = lang;
+}
+
+Language Navigator::language() const {
+	return _language;
+}
+
+void Navigator::setupContents() {
+	_contents->setNavigator(this);
+	_contents->load();
 }
