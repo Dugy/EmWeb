@@ -17,9 +17,14 @@ public:
 	~ComponentsList();
 
 private slots:
-	void on_bullshit_clicked();
 
 	void on_fullscreen_clicked();
+
+	void on_bullshit_clicked();
+
+	void on_pushButton_clicked();
+
+	void on_pushButton_2_clicked();
 
 private:
 	Ui::ComponentsList *ui;

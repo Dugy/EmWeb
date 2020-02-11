@@ -24,14 +24,17 @@ public:
 
 	void language(Language lang) override;
 	Language language() const override;
+	void showMessage(const std::string& message) override;
+	void goFullscreen() override;
 
 private:
 	Ui::Navigator *ui;
-	ComponentsList* _componentsList = nullptr;;
+	ComponentsList* _componentsList = nullptr;
 
 	bool _fullscreen = false;
 	Language _language = Language::ENGLISH;
 	std::unique_ptr<ContentBase> _contents;
+	QWidget* _central = nullptr;
 
 	void serialisation() override {
 		synch("full", _fullscreen);

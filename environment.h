@@ -6,26 +6,11 @@
 
 #ifdef __EMSCRIPTEN__
 
-#include "emscripten.h"
-inline std::string getFile(const std::string& name) {
-	std::string fileName = "https://github.com/Dugy/emweb/resources/" + name;
-	int size = -1;
-	char* data = nullptr;
-	int errorCode = 0;
-	emscripten_wget_data(name.c_str(), &data, &size, &errorCode);
-	if (errorCode or size == 1 || !data)
-		throw std::runtime_error(fileName + ": could not get resource");
-	std::string made(data);
-	free(data);
-	return made;
-}
+std::string getFile(const std::string& name);
 
-inline std::shared_ptr<Serialisable::JSON> sessionSettings() {
-	return std::shared_ptr<Serialisable::JSON>();
-}
+std::shared_ptr<Serialisable::JSON> sessionSettings();
 
-inline void sessionSettings(std::shared_ptr<Serialisable::JSON>) {
-}
+void sessionSettings(const std::shared_ptr<Serialisable::JSON>& settings);
 
 #else
 
@@ -45,14 +30,14 @@ inline std::string getFile(const std::string& name) {
 	return made;
 }
 
-inline constexpr char* SETTINGS_FILE = "settings.json";
+inline constexpr char const* SETTINGS_FILE = "settings.json";
 
 inline std::shared_ptr<Serialisable::JSON> sessionSettings() {
 	std::ifstream file(SETTINGS_FILE);
 	return Serialisable::parseJSON(file);
 }
 
-inline void sessionSettings(std::shared_ptr<Serialisable::JSON> from) {
+inline void sessionSettings(const std::shared_ptr<Serialisable::JSON>& from) {
 	std::ofstream file(SETTINGS_FILE);
 	from->write(file);
 }

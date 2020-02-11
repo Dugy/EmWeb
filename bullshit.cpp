@@ -7,6 +7,16 @@
 #include "serialisable/serialisable_brief.hpp"
 #include "contextfree_generator/cfg_generator.hpp"
 
+
+
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QObject>
+#include <QMessageBox>
+#include <QStandardPaths>
+#include <QEventLoop>
+#include <QFileInfo>
+
 Bullshit::Bullshit() :
 	ui(new Ui::Bullshit)
 {
@@ -14,7 +24,7 @@ Bullshit::Bullshit() :
 }
 
 void Bullshit::load() {
-	std::string index = getFile("bullshits.json");
+	auto index = getFile("bullshits.json");
 	struct : SerialisableBrief {
 		struct BullshitEntry : SerialisableBrief {
 			std::string titles = key("titles");
@@ -63,13 +73,16 @@ void Bullshit::load() {
 												bullshits.bullshits.at(_contentIndentifier).contents };
 		std::array<std::string, PARTS> generated;
 		for (int i = 0; i < PARTS; i++) {
-			std::string fileContents = getFile(fileNames[i]);
+			auto fileContents = getFile(fileNames[i]);
 			CfgGenerator generator;
 			generator.constructFromString(fileContents);
 			generated[i] = generator.generate(rand());
 		}
 
 		QLabel* title = new QLabel(QString::fromStdString(generated[0]), this);
+		QFont font = title->font();
+		font.setPointSize(18);
+		title->setFont(font);
 		ui->verticalLayout->addWidget(title);
 		QTextEdit* contents = new QTextEdit(this);
 		contents->setMarkdown(QString::fromStdString(generated[1]));
@@ -77,6 +90,7 @@ void Bullshit::load() {
 										  | Qt::TextInteractionFlag::LinksAccessibleByMouse);
 		ui->verticalLayout->addWidget(contents, 1);
 	}
+	_navigator->updateSettings();
 }
 
 Bullshit::~Bullshit()

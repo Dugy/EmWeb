@@ -24,8 +24,7 @@ public:
 private:
     Ui::Bullshit *ui;
 	std::string _contentIndentifier;
-    SERIALISABLE_REGISTER_POLYMORPHIC(ContentBase, Bullshit, "bull");
-	std::vector<QWidget*> _elements;
+	SERIALISABLE_REGISTER_POLYMORPHIC(ContentBase, Bullshit, "bull");
 
 	void load() override;
 };
