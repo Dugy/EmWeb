@@ -117,6 +117,7 @@ void Navigator::goFullscreen() {
 	ui->layout->removeWidget(_componentsList);
 	delete _componentsList;
 	_componentsList = nullptr;
+	updateSettings();
 }
 
 void Navigator::setupContents() {

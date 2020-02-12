@@ -85,8 +85,8 @@ void CfgGenerator::constructFromString(std::string code) {
 	const char* reading = code.c_str();
 	PossibilityNonterminal* current = nullptr;
 	std::vector<Possibility*>* filled = nullptr;
-	std::unordered_map<std::string, std::vector<std::string>> _seedsFreeze;
-	std::unordered_map<std::string, std::vector<std::pair<std::string, size_t>>> _picksFreeze;
+	std::unordered_map<std::string, std::vector<std::string>> seedsFreeze;
+	std::unordered_map<std::string, std::vector<std::pair<std::string, size_t>>> picksFreeze;
 	std::string buf;
 	auto makeTerminal = [&] (std::string contents) -> PossibilityTerminal* {
 		// For memory management
@@ -106,7 +106,7 @@ void CfgGenerator::constructFromString(std::string code) {
 				std::string argName;
 				while (*args != 0) {
 					if (*args == ',' || *args == ')') {
-						_seedsFreeze[name].push_back(argName);
+						seedsFreeze[name].push_back(argName);
 						argName.clear();
 					} else if (*args == ':') {
 						args++;
@@ -116,7 +116,8 @@ void CfgGenerator::constructFromString(std::string code) {
 							args++;
 						}
 						std::hash<std::string> hash;
-						_picksFreeze[name].push_back(std::pair<std::string, size_t>(argName, hash(varName)));
+						picksFreeze[name].push_back(std::pair<std::string, size_t>(argName, hash(varName)));
+						argName.clear();
 					} else argName.push_back(*args);
 					args++;
 				}
@@ -174,13 +175,13 @@ void CfgGenerator::constructFromString(std::string code) {
 			}
 		}
 	}
-	for (const std::pair<const std::string, std::vector<std::string>>& it : _seedsFreeze) {
+	for (const std::pair<const std::string, std::vector<std::string>>& it : seedsFreeze) {
 		PossibilityNonterminal& related = _nonterminals[it.first];
 		for (const std::string& it2 : it.second) {
 			related._seedsFreeze.push_back(&(_nonterminals[it2]));
 		}
 	}
-	for (const std::pair<const std::string, std::vector<std::pair<std::string, size_t>>>& it : _picksFreeze) {
+	for (const std::pair<const std::string, std::vector<std::pair<std::string, size_t>>>& it : picksFreeze) {
 		PossibilityNonterminal& related = _nonterminals[it.first];
 		for (const std::pair<std::string, size_t>& it2 : it.second) {
 			related._picksFreeze.push_back(std::pair<Possibility*, size_t>(&(_nonterminals[it2.first]), it2.second));

@@ -6,6 +6,12 @@
 			"description" : "Esoteric Bullshit",
 			"language" : "en"
 		},
+		"bsconspen" : {
+			"titles" : "bullshits/bsconspen_titles.cfg",
+			"contents" : "bullshits/bsconspen.cfg",
+			"description" : "Conspiracy theories",
+			"language" : "en"
+		},
 		"bssk" : {
 			"titles" : "bullshits/bssk_titles.cfg",
 			"contents" : "bullshits/bssk.cfg",
