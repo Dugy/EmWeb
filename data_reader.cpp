@@ -96,7 +96,7 @@ GraphData readGraph(std::istream& file, const std::string& fileName) {
 	};
 
 	std::string line;
-	if (graph.named) {
+	if (!graph.named) {
 		addLine(firstLine);
 	}
 	while (std::getline(file, line, '\n')) {
