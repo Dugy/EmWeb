@@ -64,8 +64,10 @@ GraphData readGraph(std::istream& file, const std::string& fileName) {
 	position = 0;
 	if (graph.named) {
 		graph.xName = readOne(firstLine);
+		int line = 0;
 		while (firstLine[position] && firstLine[position] != '\n') {
-			graph.lines.back().name = readOne(firstLine);
+			graph.lines[line].name = readOne(firstLine);
+			line++;
 		}
 	}
 
