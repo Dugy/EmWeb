@@ -22,9 +22,11 @@ private slots:
 
 	void on_bullshit_clicked();
 
-	void on_pushButton_clicked();
+	void on_contextfreeGenerator_clicked();
 
-	void on_pushButton_2_clicked();
+	void on_blackspeechTranslator_clicked();
+
+	void on_plottingTool_clicked();
 
 private:
 	Ui::ComponentsList *ui;

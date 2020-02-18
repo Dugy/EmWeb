@@ -25,12 +25,17 @@ void ComponentsList::on_bullshit_clicked()
 	_navigator->setWidget("bull");
 }
 
-void ComponentsList::on_pushButton_clicked()
+void ComponentsList::on_contextfreeGenerator_clicked()
 {
 	_navigator->setWidget("cfg");
 }
 
-void ComponentsList::on_pushButton_2_clicked()
+void ComponentsList::on_blackspeechTranslator_clicked()
 {
 	_navigator->setWidget("evil");
+}
+
+void ComponentsList::on_plottingTool_clicked()
+{
+	_navigator->setWidget("plot");
 }

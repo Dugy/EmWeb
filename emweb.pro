@@ -6,7 +6,7 @@
 
 QT	   += core gui network
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = dugis_web
 TEMPLATE = app
@@ -40,6 +40,9 @@ SOURCES += \
 		environment.cpp \
 		main.cpp \
 		navigator.cpp \
+		plotting_tool.cpp \
+		quick_plot/data_reader.cpp \
+		quick_plot/qcustomplot.cpp \
 		text_generator.cpp
 
 HEADERS += \
@@ -52,6 +55,9 @@ HEADERS += \
 		environment.h \
 		i_navigator.h \
 		navigator.h \
+		plotting_tool.hpp \
+		quick_plot/data_reader.hpp \
+		quick_plot/qcustomplot.h \
 		text_generator.hpp
 
 FORMS += \
@@ -60,4 +66,5 @@ FORMS += \
 		components_list.ui \
 		default_screen.ui \
 		navigator.ui \
+		plotting_tool.ui \
 		text_generator.ui

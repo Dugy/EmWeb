@@ -27,6 +27,13 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QPushButton" name="plottingTool">
+     <property name="text">
+      <string>Plotting Tool</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="bullshit">
      <property name="text">
       <string>Nonsensical text generator</string>
@@ -34,14 +41,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="contextfreeGenerator">
      <property name="text">
       <string>Context-free text generator</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="blackspeechTranslator">
      <property name="text">
       <string>Evil language translator</string>
      </property>
