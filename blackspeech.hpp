@@ -57,9 +57,15 @@ private slots:
 
 	void on_toEnglish_clicked();
 
+	void on_english_textChanged();
+
+	void on_blackspeech_textChanged();
+
 private:
 	Ui::Blackspeech *ui;
 	SERIALISABLE_REGISTER_POLYMORPHIC(ContentBase, Blackspeech, "evil");
+
+	void normaliseButtons();
 };
 
 #endif // BLACKSPEECH_HPP

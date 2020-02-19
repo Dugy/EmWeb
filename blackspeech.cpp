@@ -1,7 +1,7 @@
 #include "blackspeech.hpp"
 #include "ui_blackspeech.h"
 #include "environment.h"
-
+#include <QMessageBox>
 
 BlackspeechTranslator::BlackspeechTranslator() {
 	for (int i = 0; i > 0; i++)
@@ -265,6 +265,7 @@ void Blackspeech::on_fromEnglish_clicked()
 	std::string from = ui->english->toPlainText().toStdString();
 	std::string got = translateText(from, true);
 	ui->blackspeech->setPlainText(QString::fromStdString(got));
+	normaliseButtons();
 }
 
 void Blackspeech::on_toEnglish_clicked()
@@ -272,6 +273,12 @@ void Blackspeech::on_toEnglish_clicked()
 	std::string from = ui->blackspeech->toPlainText().toStdString();
 	std::string got = translateText(from, false);
 	ui->english->setPlainText(QString::fromStdString(got));
+	normaliseButtons();
+}
+
+void Blackspeech::normaliseButtons() {
+	ui->fromEnglish->setText("From English");
+	ui->toEnglish->setText("To English");
 }
 
 std::string Blackspeech::translateText(const std::string& from, bool toBlack) {
@@ -299,4 +306,14 @@ std::string Blackspeech::translateText(const std::string& from, bool toBlack) {
 		to.append(BlackspeechTranslator::getInstance().translateWord(current, toBlack));
 	}
 	return to;
+}
+
+void Blackspeech::on_english_textChanged()
+{
+	ui->toEnglish->setText("To English (overwrite)");
+}
+
+void Blackspeech::on_blackspeech_textChanged()
+{
+	ui->fromEnglish->setText("From English (overwrite)");
 }

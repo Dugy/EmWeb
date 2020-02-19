@@ -90,6 +90,7 @@ void Navigator::setWidget(const std::string& name) {
 		ui->layout->replaceWidget(_central, _contents.get());
 		delete _central;
 		setupContents();
+		updateSettings();
 	} catch(std::exception& e) {
 		showMessage(e.what());
 	}

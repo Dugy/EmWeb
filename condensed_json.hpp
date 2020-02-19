@@ -27,9 +27,15 @@ private slots:
 
 	void on_jsonButton_clicked();
 
+	void on_json_textChanged();
+
+	void on_condensed_textChanged();
+
 private:
 	Ui::CondensedJSON *ui;
 	SERIALISABLE_REGISTER_POLYMORPHIC(ContentBase, CondensedJSON, "cjson");
+
+	void normaliseButtons();
 };
 
 #endif // CONDENSED_JSON_HPP
