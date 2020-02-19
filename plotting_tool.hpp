@@ -86,6 +86,7 @@ private:
 	bool _autoResizing = false;
 	bool haveX() const;
 	void determineEdges();
+	void detectReorder();
 
 };
 

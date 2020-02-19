@@ -1,5 +1,6 @@
 #include "plotting_tool.hpp"
 #include "ui_plotting_tool.h"
+#include "ui_graph_line_setting.h"
 #include "quick_plot/data_reader.hpp"
 #include <sstream>
 
@@ -17,6 +18,9 @@ PlottingTool::PlottingTool() :
 
 PlottingTool::~PlottingTool()
 {
+	if (_lastTab == TAB_LINES) {
+		detectReorder();
+	}
 	delete ui;
 }
 
@@ -62,6 +66,8 @@ void PlottingTool::load() {
 	ui->plot->legend->setVisible(true);
 	ui->plot->setInteraction(QCP::iRangeDrag, true);
 	ui->plot->setInteraction(QCP::iRangeZoom, true);
+	ui->lines->setDragDropMode(QAbstractItemView::InternalMove);
+	ui->lines->setSizeAdjustPolicy(QListWidget::AdjustToContents);
 	connect(ui->plot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(on_resize()));
 	connect(ui->plot->yAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(on_resize()));
 	int lastTabStored = _lastTab;
@@ -124,6 +130,11 @@ void PlottingTool::on_tabs_currentChanged(int index) {
 	if (_lastTab == TAB_DATA) {
 		on_updateDataButton_clicked();
 		determineEdges();
+		_navigator->updateSettings();
+	}
+	else if (_lastTab == TAB_LINES) {
+		detectReorder();
+		_navigator->updateSettings();
 	}
 
 	if (index == TAB_PLOT) {
@@ -205,7 +216,38 @@ void PlottingTool::on_tabs_currentChanged(int index) {
 			}
 		}
 	} else if (index == TAB_LINES) {
+		ui->lines->clear();
+		int originalIndex = 0;
+		for (auto& it : _graphs) {
+			Ui_GraphLineSetting setting;
+			std::unique_ptr<QWidget> widget = std::make_unique<QWidget>();
+			setting.setupUi(widget.get());
 
+			setting.name->setText(QString::fromStdString(it->name));
+			connect(setting.name, &QLineEdit::textChanged, [this, entry = it.get()] (QString newText) {
+				entry->name = newText.toStdString();
+				_navigator->updateSettings();
+			});
+			setting.isX->setChecked(it->isX);
+			connect(setting.isX, &QCheckBox::stateChanged, [this, entry = it.get(), cont = setting.continuous] (int state) {
+				entry->isX = (state == Qt::CheckState::Checked);
+				cont->setEnabled(!entry->isX);
+				_navigator->updateSettings();
+			});
+			setting.continuous->setChecked(it->continuous);
+			setting.continuous->setEnabled(!it->isX);
+			connect(setting.continuous, &QCheckBox::stateChanged, [this, entry = it.get()] (int state) {
+				entry->continuous = (state == Qt::CheckState::Checked);
+				_navigator->updateSettings();
+			});
+
+			QListWidgetItem* item = new QListWidgetItem(ui->lines);
+			item->setSizeHint(QSize(0, 50));
+			item->setData(0, originalIndex);
+			ui->lines->addItem(item);
+			ui->lines->setItemWidget(item, widget.release());
+			originalIndex++;
+		}
 	} else throw std::runtime_error("Unknown tab opened!");
 	_lastTab = index;
 }
@@ -241,7 +283,19 @@ void PlottingTool::determineEdges() {
 		for (auto& it : _graphs) {
 			sizeNeeded = std::max(sizeNeeded, it->size());
 		}
+		_xMin = 0;
+		_xMax = sizeNeeded;
 	}
+}
+
+void PlottingTool::detectReorder() {
+	auto model = ui->lines->findItems("*", Qt::MatchWildcard);
+	std::vector<std::unique_ptr<Graph>> newGraphs(_graphs.size());
+	for (int i = 0; i < model.size(); i++) {
+		int newOrder = model.at(i)->data(0).toInt();
+		newGraphs[i] = std::move(_graphs[newOrder]);
+	}
+	std::swap(_graphs, newGraphs);
 }
 
 void PlottingTool::on_resize() {
@@ -252,4 +306,5 @@ void PlottingTool::on_resize() {
 	auto yRange = ui->plot->yAxis->range();
 	_yMin = yRange.lower;
 	_yMax = yRange.upper;
+	_navigator->updateSettings();
 }

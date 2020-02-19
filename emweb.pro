@@ -65,6 +65,7 @@ FORMS += \
 		bullshit.ui \
 		components_list.ui \
 		default_screen.ui \
+		graph_line_setting.ui \
 		navigator.ui \
 		plotting_tool.ui \
 		text_generator.ui
