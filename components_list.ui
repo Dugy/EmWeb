@@ -34,6 +34,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="condensedJSON">
+     <property name="text">
+      <string>Condensed JSON</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="bullshit">
      <property name="text">
       <string>Nonsensical text generator</string>

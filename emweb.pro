@@ -34,6 +34,7 @@ SOURCES += \
 		blackspeech.cpp \
 		bullshit.cpp \
 		components_list.cpp \
+		condensed_json.cpp \
 		content_base.cpp \
 		contextfree_generator/cfg_generator.cpp \
 		default_screen.cpp \
@@ -49,6 +50,7 @@ HEADERS += \
 		blackspeech.hpp \
 		bullshit.hpp \
 		components_list.h \
+		condensed_json.hpp \
 		content_base.hpp \
 		contextfree_generator/cfg_generator.hpp \
 		default_screen.h \
@@ -64,6 +66,7 @@ FORMS += \
 		blackspeech.ui \
 		bullshit.ui \
 		components_list.ui \
+		condensed_json.ui \
 		default_screen.ui \
 		graph_line_setting.ui \
 		navigator.ui \

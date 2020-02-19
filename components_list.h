@@ -28,6 +28,8 @@ private slots:
 
 	void on_plottingTool_clicked();
 
+	void on_condensedJSON_clicked();
+
 private:
 	Ui::ComponentsList *ui;
 	iNavigator* _navigator;

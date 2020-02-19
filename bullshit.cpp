@@ -80,15 +80,19 @@ void Bullshit::load() {
 		}
 
 		QLabel* title = new QLabel(QString::fromStdString(generated[0]), this);
+		title->setWordWrap(true);
 		QFont font = title->font();
 		font.setPointSize(18);
 		title->setFont(font);
 		ui->verticalLayout->addWidget(title);
-		QTextEdit* contents = new QTextEdit(this);
-		contents->setMarkdown(QString::fromStdString(generated[1]));
+		QLabel* contents = new QLabel(this);
+		contents->setTextFormat(Qt::MarkdownText);
+		contents->setText(QString::fromStdString(generated[1]));
 		contents->setTextInteractionFlags(Qt::TextInteractionFlag::TextSelectableByMouse
 										  | Qt::TextInteractionFlag::LinksAccessibleByMouse);
+		contents->setWordWrap(true);
 		ui->verticalLayout->addWidget(contents, 1);
+		ui->verticalLayout->addWidget(new QWidget(), 1);
 	}
 	_navigator->updateSettings();
 }

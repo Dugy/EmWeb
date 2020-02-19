@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CondensedJSON</class>
+ <widget class="QWidget" name="CondensedJSON">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>766</width>
+    <height>567</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,1">
+   <item>
+    <widget class="QLabel" name="comment">
+     <property name="text">
+      <string>Condensed JSON is a format that can be directly converted to JSON and back, but takes much less space. It combines the ideas from Message Pack with ideas from Packed JSON. See more at [its github page](https://github.com/Dugy/serialisable#a-more-condensed-format).</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::MarkdownText</enum>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="jsonWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="jsonLabel">
+        <property name="text">
+         <string>JSON:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="jsonSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="json">
+     <property name="plainText">
+      <string>{
+	&quot;x&quot; : [12, 34, 35, 84],
+	&quot;y&quot; : [19, 23, 84, 24],
+	&quot;deltas&quot; : [1.3, 2.9, 3.9, -2.3]
+}</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="translationWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="condensedLabel">
+        <property name="text">
+         <string>Condensed JSON (base64):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="translateSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>745</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="toCondensedButton">
+        <property name="text">
+         <string>To Condensed</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="jsonButton">
+        <property name="text">
+         <string>To JSON</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="condensed"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

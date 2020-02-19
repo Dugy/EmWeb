@@ -39,3 +39,8 @@ void ComponentsList::on_plottingTool_clicked()
 {
 	_navigator->setWidget("plot");
 }
+
+void ComponentsList::on_condensedJSON_clicked()
+{
+	_navigator->setWidget("cjson");
+}
