@@ -1,5 +1,6 @@
 #include "condensed_json.hpp"
 #include "ui_condensed_json.h"
+#include "environment.h"
 #include <QMessageBox>
 
 CondensedJSON::CondensedJSON() :
@@ -57,4 +58,17 @@ void CondensedJSON::on_condensed_textChanged()
 void CondensedJSON::normaliseButtons() {
 	ui->jsonButton->setText("To JSON");
 	ui->toCondensedButton->setText("To Condensed");
+}
+
+void CondensedJSON::on_uploadBinary_clicked()
+{
+	uploadFile([this] (const std::vector<uint8_t>& uploaded) {
+		ui->condensed->setPlainText(QString::fromStdString(Serialisable::toBase64(uploaded)));
+	});
+}
+
+void CondensedJSON::on_downloadBinary_clicked()
+{
+	auto downloaded = Serialisable::fromBase64(ui->condensed->toPlainText().toStdString());
+	downloadFile(downloaded);
 }

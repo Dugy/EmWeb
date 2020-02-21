@@ -14,6 +14,19 @@ PlottingTool::PlottingTool() :
 	_lastTab(TAB_PLOT)
 {
 	ui->setupUi(this);
+
+	// Example data
+	auto graph1 = std::make_unique<PointGraph>();
+	graph1->isX = true;
+	graph1->name = "x";
+	graph1->points = { 1, 2, 3, 4, 5};
+	_graphs.push_back(std::move(graph1));
+
+	auto graph2 = std::make_unique<PointGraph>();
+	graph2->name = "square";
+	graph2->points = { 1, 4, 9, 16, 25};
+	_graphs.push_back(std::move(graph2));
+	determineEdges();
 }
 
 PlottingTool::~PlottingTool()

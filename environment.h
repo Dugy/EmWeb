@@ -3,6 +3,7 @@
 
 #include <string>
 #include <serialisable/serialisable.hpp>
+#include <functional>
 
 #ifdef __EMSCRIPTEN__
 
@@ -43,5 +44,9 @@ inline void sessionSettings(const std::shared_ptr<Serialisable::JSON>& from) {
 }
 
 #endif
+
+void uploadFile(std::function<void(const std::vector<uint8_t>&)> callback);
+
+void downloadFile(const std::vector<uint8_t>& downloaded);
 
 #endif // ENVIRONMENT_H

@@ -31,6 +31,10 @@ private slots:
 
 	void on_condensed_textChanged();
 
+	void on_uploadBinary_clicked();
+
+	void on_downloadBinary_clicked();
+
 private:
 	Ui::CondensedJSON *ui;
 	SERIALISABLE_REGISTER_POLYMORPHIC(ContentBase, CondensedJSON, "cjson");

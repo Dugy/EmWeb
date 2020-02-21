@@ -15,6 +15,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Tolkien has made up a language suitable for evil orcs. But his orcish had little vocabulary and didn't sound very evil. So I created one that looks and sounds much more evil. It doesn't have a grammar and such, it's simply an encoding of English words.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPlainTextEdit" name="english"/>
    </item>
    <item>
